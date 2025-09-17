@@ -77,15 +77,15 @@ The lab guide assumes you are using the RHEL desktop VM from the IBM Asset Repo.
 
 	![](./images/image309.png)
 
-
 1. Review the yaml template file.  Scan through the template which has definitions for all three queue managers. Your environment variables will be substituted throughout the file. If you execute a find for "$" you can easily locate the substitutions.
 
 	Each queue manager has two *ConfigMap* stanzas, one *QueueManager* stanza, and one *Route* stanza. One *ConfigMap* is the mqsc commands for the queue manager - **uniform-cluster-mqsc-x** and one for the cluster ini file - **uniform-cluster-ini-x**.
 
-	The queue managers share the same secret - lines 1 - 9.
-	Queue manager **mqxxa** is defined on lines 11 - 116.
-	Queue manager **mqxxb** is defined on lines 118 - 223.
+	The queue managers share the same secret - lines 1 - 9.<br/>
+	Queue manager **mqxxa** is defined on lines 11 - 116.<br/>
+	Queue manager **mqxxb** is defined on lines 118 - 223.<br/>
 	Queue manager **mqxxc** is defined on lines 225 - 325.
+
 	![](./images/image211.png)
 
 	Pay particular attention to the mqsc commands which define the cluster repository queue managers and the cluster channels.
@@ -97,6 +97,7 @@ The lab guide assumes you are using the RHEL desktop VM from the IBM Asset Repo.
 1. A new tab will be opened.  Login with your username/password Click *Display Token*, copy the token and run it on your terminal.
 
 	![](./images/image213.png)
+
 	**Note**: You should still be in your project so you shouldn't need to run this command.
 
 	Run the following command to navigate to your project substituting your personal project name:
@@ -107,22 +108,21 @@ The lab guide assumes you are using the RHEL desktop VM from the IBM Asset Repo.
 
 1. Now we will run the install script for the unicluster Qmgrs.
 
-  ```
-  ./uni-install.sh
-  ```
+	```
+	./uni-install.sh
+	```
 
 	Review the output from the script.  You should see 3 Qmgrs created with all required assets.
 
 	![](./images/image209a.png)
 
-1. Return to the *Platform Navigator* web browser page. In *Integration Instances* click the *Refresh* button.
-The queue managers will be in a *Pending* state for a couple of minutes while they are provisioned.
+1. Return to the *Platform Navigator* web browser page. In *Integration Instances* click the *Refresh* button. The queue managers will be in a *Pending* state for a couple of minutes while they are provisioned.
 
- 	![](./images/image214.png)
+	![](./images/image214.png)
 
 1. After a few minutes the queue managers will then show *Ready* on the *Platform Navigator* and the pods will show *Running* on the *OpenShift Console*.
 
- 	![](./images/image214aa.png)
+	![](./images/image214aa.png)
 
 ## Check uniform cluster health
 
@@ -136,7 +136,7 @@ But with all the new features that have been added to the **MQ Console** you can
 
 1. You could be presented with a warning pop-up. Click *Advanced*, then scroll down and click *Accept the Risk and Continue*.
 
-  **Note**: If you receive the error "*Secure Connection Failed*", just give it some extra time and reload the page.
+	**Note:** If you receive the error *Secure Connection Failed*, just give it some extra time and reload the page.
 
 	![](./images/image21.png)
 
@@ -144,9 +144,7 @@ But with all the new features that have been added to the **MQ Console** you can
 
 	![](./images/image22.png)
 
-1. You are now on the Overview page.  You will see varies information regarding your QMgr.  
-
-	Click on the **Queue** tab now.
+1. You are now on the Overview page.  You will see varies information regarding your QMgr. Click on the **Queue** tab now.
 
 	![](./images/image22a.png)
 
@@ -166,6 +164,7 @@ You will also see the other QMgr versions.
 1. Here you will see the connected queue manager names and status.
 
 	Next click on the **Queue manager channel**
+
 	![](./images/image22dd.png)
 
 1. Here you find your cluster channels. If you looked closely at the yaml template, you'll remember that your *mqxxa* and *mqxxb* are the primary repositories for your cluster *UNICLUSxx*. While looking at *mqxxa* you see a cluster receiver channel **TO_UNICLUS_MQ00A** and two cluster sender channels **TO_UNICLUS_MQ00B** and **TO_UNICLUS_MQ00C**. They should be *Running*.
@@ -191,11 +190,13 @@ For testing our cluster we shall see that by using Queue Manager Groups within o
 
 	1. Run the update script. You will need to pass in your *Student number* and *Namespace*
 
-    ```
-    ./update-scripts.sh -i 01 -n student1
-    ```
+		```
+		./update-scripts.sh -i 01 -n student1
+		```
 
 		* This will create your **ccdt.json** file as well as create a **getterApp.sh** and **putterApp.sh** that you will use later.
+
+		* **Note:** You can ignore warnings about "line delimited by end-of-file"
 
 	1. Now edit the new ccdt.json file.   
 		The *host* is updated for each Qmgr and the clientConnection name.  Also for the queueManager name it will have *ANY_QM.
@@ -312,11 +313,10 @@ You have completed this lab Uniform Clusters and Application Rebalancing.
 [Return to MQ lab page](../index.md)
 
 ## Appendix A
+
 Perform health-check on Uniform Cluster using MQExplorer
 
-1. Open a new terminal window.
-
- Enter the following command to start MQ Explorer making sure to use the correct case:
+1. Open a new terminal window.Enter the following command to start MQ Explorer making sure to use the correct case:
 
 	```
 	MQExplorer
@@ -332,18 +332,17 @@ Perform health-check on Uniform Cluster using MQExplorer
 
 	![](./images/image249.png)
 
-1. We will now need to get the hostname for this Qmgr to connect to it outside the OCP cluster to MQExplorer.   
-Run the following command
+1. We will now need to get the hostname for this Qmgr to connect to it outside the OCP cluster to MQExplorer. Run the following command and copy the hostname
 
-```
-oc get route -n melch1 | grep mq01a
-```
-Copy the hostname
+	```
+	oc get route -n melch1 | grep mq01a
+	```
+
 	![](./images///image249a.png)
 
-*	Enter the value from the *hostname* above.
-*	Enter **443** for the *Port number*.
-*	Enter your SVRCONN channel name in the *Server-connection channel* field.
+	*	Enter the value from the *hostname* above.
+	*	Enter **443** for the *Port number*.
+	*	Enter your SVRCONN channel name in the *Server-connection channel* field.
 
 	**Note** for the uniform cluster lab do not click the checkbox for Multi-instance queue manager.
 
@@ -365,20 +364,7 @@ Copy the hostname
 
 	![](./images///image141.png)
 
-1. Click *Finish*. You will get a pop-up saying "Trying to connect to the queue manager".
-
-	![](./images///image141a.png)
-
-1. After a few seconds you see that MQ Explorer has connected. The Queue Manager will be added and shown in the navigator.
-
-	![](./images/image142.png)
-
-1. Operate MQ Explorer as you normally would. Expand the queue manager and "explore" MQ looking at queues, channels, etc.
-
-	![](./images/image143.png)
-
-
-**You now have the hosts to connect to the QMgrs Connect all 3 Qmgrs in MQExplorer**
+1. Click *Finish*. **You now have the hosts to connect to the QMgrs Connect all 3 Qmgrs in MQExplorer**
 
 1. Expand *Queue Manager Clusters* to confirm that queue managers **mqxxa** and **mqxxb** have full repositories, while **mqxxc** has a partial repository.
 

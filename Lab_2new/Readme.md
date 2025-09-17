@@ -329,7 +329,9 @@ The following status fields are used to report Native HA configuration status:
 	oc get pods | grep mq01ha
 	```
 
-	You will see that pod **student2-mq02ha-ibm-mq-2** is now the active pod and the other two are in standby. This is indicated by the *Ready* column which shows 1 of 1 containers is running. The other pods have 0 of 1 containers running.
+	You will see that pod **student2-mq02ha-ibm-mq-1** is now the active pod and the other two are in standby. This is indicated by the *Ready* column which shows 1 of 1 containers is running. The other pods have 0 of 1 containers running.
+
+	**<span style="color:red">Note:</span>** In this case, we describe that the initial active pod was number 0 (*student2-mq02ha-ibm-mq-0*) and the new active pod after failover is number 1 (*student2-mq02ha-ibm-mq-1*), but you could observe in your case a different situation since active pod selection mechanism could choose a different active pod on each case. This comment also applies to the following steps in this tutorial, where you could observe differences regarding which pod is the active pod to be "killed" and which one becomes active on each case.
 
 	![](./images/image30a.png)
 
