@@ -1,4 +1,4 @@
-# Lab 1 - NativeHA: Deploying a container Native HA persistent IBM MQ Queue Manager on the Cloud Pak for Integration
+# Lab 2 - NativeHA: Deploying a container Native HA persistent IBM MQ Queue Manager on the Cloud Pak for Integration
 
 [Return to MQ lab page](../index.md)
 
