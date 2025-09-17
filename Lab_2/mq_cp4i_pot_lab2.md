@@ -1,7 +1,7 @@
-# Lab 2 - NativeHA: Deploying a Cloud Native HA persistent IBM MQ Queue Manager on the Cloud Pak for Integration
+# Lab 2 - NativeHA: Deploying a Cloud Native HA persistent IBM MQ Queue Manager on the Openshift
 [Return to lab index page](../index.md)
 
-These instructions will document the process to deploy a NativeHA highly available (HA) persistent IBM MQ on the Cloud Pak for Integration (CP4I) 2023.2.1.
+These instructions will document the process to deploy a NativeHA highly available (HA) persistent IBM MQ on Openshift.
 
 A Native HA configuration provides a highly available queue manager where the recoverable MQ data (for example, the messages)  are replicated across multiple sets of storage, preventing loss from storage failures. The queue manager consists of multiple running instances, one is the leader, the others are ready to quickly take over in the event of a failure, maximizing access to the queue manager and its messages.
 
@@ -97,7 +97,7 @@ This lab shows you how to write/use yaml to create the "nativeHA" queue manager.
 
 	The terminal window cannot be used while gedit is open. If you close the window, gedit will end.
 
-1. Change	*TARGET_NAMESPACE* to your assigned project/namespace. **The value *VERSION* and *LICENSE* must be provided by the instructor if changes are required**. Change **00** in *QMname* export to your student number. The value for *SC* export should be set to **ocs-storagecluster-ceph-rbd**.
+1. Change	*TARGET_NAMESPACE* to your assigned project/namespace. **The value for *VERSION*, *LICENSE* and *SC* would be provided by the instructor**. Change **00** in *QMname*, *CHANNEL* and *CHLCAPS* to your student id.
 
 	![](./images/image2a.png)
 

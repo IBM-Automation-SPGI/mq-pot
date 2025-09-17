@@ -1,4 +1,5 @@
 # Lab 1 - Creating an MQ Instance Using the Platform Navigator
+
 [Return to lab index page](../index.md)
 
 Starting with this lab, each attendee will be assigned an ID number (01 - 30) by the instructor if running a PoT.
@@ -31,23 +32,19 @@ Tip - "The screen shots were taken on a test cluster and many will not match wha
 
 	If prompted again, respond as you did above.
 
-1. Finally you are routed to the *Log in to IBM Cloud Pak* page. Select *Enterprise LDAP* and enter the user name and password that was provided to you to log on.
+1. Finally you are routed to the *Log in to IBM Cloud Pak* page. Enter the user name and password that was provided to you to log on.
 
 	![](./images/image206.png)
 
-1. The *Cloud Pak Home* page appears. This is also referred to as the *Platform Navigator*. Click *Integration Instances* to display the various runtimes available in CP4I.
+1. The *Cloud Pak Home* page appears. This is also referred to as the *Platform Navigator*. Here you can see the various runtimes available in CP4I. Click *Create an Instance*.
 
 	![](./images/image207.png)
 
-1. Click *Create an Instance*.
-
-	![](./images/image208.png)
-
-1. A number of tiles are displayed. Click the *Messaging* tile, then click *Next*.
+1. A number of tiles are displayed. Click the *Queue Manager* tile, then click *Next*.
 
 	![](./images/image209.png)
 
-1. You will use the option called **Quick start** which will deploy an MQ container with 0.5 cpu, 1 GB of memory, and measured at 0.125 vpc (Virtual Processor Core). Click the *Quick start* tile then click *Next*.
+1. You will use the option called **Quick start** which will deploy an MQ container with 0.5 cpu and 1 GB of memory. Click the *Quick start* tile then click *Next*.
 
 	![](./images/image210.png)
 
@@ -66,11 +63,15 @@ Tip - "The screen shots were taken on a test cluster and many will not match wha
 
 	![](./images/image212.png)
 
-1. If all entries are valid, you will receive a notification of success in green. Any errors result in a notification in red. Status remains *Pending* while the queue manager is being provisioned. If you click *Pending* you may receive a *Conditions* pop-up. Close the pop-up.
+1. If all entries are valid, you will receive a notification of success in green. Any errors result in a notification in red. Status remains *Pending* while the queue manager is being provisioned. If you click *Pending* you may receive a *Conditions* pop-up.
 
 	![](./images/image8a.png)
 
-1. Click refresh button until you see you MQ instance to be **Ready**
+	Close the pop-up.
+
+	![](./images/image8a1.png)
+
+1. Click refresh button until you see you MQ instance to be **Ready**. You can use the filter feature  to limit the showed instances to those that are on your namespace.
 
 	![](./images/image220.png)
 
@@ -78,7 +79,7 @@ Tip - "The screen shots were taken on a test cluster and many will not match wha
 <a name="mqconsole"></a>
 ### Start MQ Console
 
-1. In the navigator under *Integration Instances* and your queue manager shows a *Ready* status, you can now click the hyperlink to open the MQ console for your queue manager. The runtime instance shows *mqxx-quickstart-cp4i* (where xx is your student number), but that is not your queue manager name. You named it **mqxxqs**.
+1. Once your queue manager shows a *Ready* status, you can now click the hyperlink to open the MQ console for your queue manager. The runtime instance shows *mqxx-quickstart-cp4i* (where xx is your student number), but that is not your queue manager name. You named it **mqxxqs**.
 
 	![](./images/image223.png)
 
@@ -86,11 +87,11 @@ Tip - "The screen shots were taken on a test cluster and many will not match wha
 
 	The MQ Console looks nothing like MQ Explorer. It doesn't even look like earlier versions of MQ Console. Feel free to poke around (or click around) and explore the various tiles and side bar menus. When you are ready, continue to the next step - creating a queue.
 
-1. 	Click the *Create a queue* tile.
+1. 	Click on the *Manage* menu, then click *Queues* tab, and finally the *Create* button.
 
 	![](./images/image224.png)
 
-1. A number of tiles are displayed for the different queue types. Behind each tile are the properties for that particular queue type. Click the tile for a *Local* queue.
+1. A number of tiles are displayed for the different queue types. Behind each tile are the properties for that particular queue type. Select the tile for a *Local* queue and click the *Next* button.
 
 	![](./images/image225.png)
 
@@ -106,7 +107,7 @@ Tip - "The screen shots were taken on a test cluster and many will not match wha
 
 	![](./images/image302.png)
 
-1. Read the definition, then click *Next*.
+1. Select the *Server Connection Channel* tile. Read the definition, then click *Next*.
 
 1. To keep it simple enter the name of your queue manager (mqXXqs where XX is the student number provided by the instructor) so that the channel name matches the queue manager name. *Custom create* tab lets you provide detailed properties. Click *Create*.
 
@@ -116,34 +117,11 @@ Tip - "The screen shots were taken on a test cluster and many will not match wha
 
 	![](./images/image303.png)
 
-1. By default MQ is secure and will block all communication without explicit configuration. We will allow all communication for the newly created channel. Click on *View Configuration* in the top right corner:
-
-    ![](./images/image304.png)
-
-1. Click the *Security* tab, *Channel authentication* section, then click *Create +*.
-
-    ![](./images/image232.png)
-
-1. We will create a *channel auth* record that blocks nobody and allows everyone. Select **Block** from the pull down, and click the *Final assigned user ID* tile.
-
-	![](./images/image233.png)
-
-1. For *Channel name* enter the channel name you just created(**mqXXqs** where xx is student number). Scroll down and type  **nobody** in the *User list* field then click the "+" sign to add it.
-
-	![](./images/image234.png)
-
-1. Click *Create* to add the record.
-
-	![](./images/image235.png)
-	You will receive a green succes notification and the record appears in the list.
-
-	![](./images/image236.png)
-
 ## Test MQ
 
-MQ has been deployed within the Cloud Pak for Integration to other containers deployed within the same Cluster. This deployment is NOT accessible externally. Depending on your scenario you can connect ACE / API Connect / Event Streams, etc to MQ using the deployed service. This acts as an entry point into MQ within the Kubernetes Cluster. Assuming you followed the above instructions within the deployment the hostname will be of the form mq00qs-cp4i-ibm-mq. To verify the installation we will use an MQ client sample within the deployment.
+MQ has been deployed within the Cloud Pak for Integration to other containers deployed within the same Cluster. This deployment is NOT accessible externally. Depending on your scenario you can connect ACE / API Connect / Event Streams, etc to MQ using the deployed service. This acts as an entry point into MQ within the Kubernetes Cluster. Assuming you followed the above instructions within the deployment the hostname will be of the form mqXXqs-cp4i-ibm-mq. To verify the installation we will use an MQ client sample within the deployment.
 
-1. Return to the OCP Console. Make sure you are in the *studentxx* namespace (Where xx is studen number), by clicking *Projects*, typing **student** in the filter field to find *studentxx* and clicking its hyperlink.
+1. Return to the OCP Console tab. Make sure you are in the *studentxx* namespace (Where xx is studen number), by clicking *Projects*, typing **student** in the filter field to find *studentxx* and clicking its hyperlink.
 
 	![](./images/image237.png)
 
@@ -154,6 +132,15 @@ MQ has been deployed within the Cloud Pak for Integration to other containers de
 1. Click the hyperlink for the pod. Now you will see quite a bit of details about the pod. Explore the details where you find graphs for memory and cpu usage, filesystem and network (Tab **metrics**). Come back to **Details** tab and scroll down and you will find the containers and volumes. From this panel you can drill down into any of these. But for now, you need to run a test. Click the *Terminal* tab which will automatically log you into the Queue Manager container.
 
 	![](./images/image239.png)
+
+1. By default MQ is secure and will block all communication without explicit configuration. Run the following commands to disable channel authentication (only for demo purposes).Don't forget to replace XX with your student ID.
+
+	```
+	runmqsc mqXXqs
+	ALTER QMGR CHLAUTH(DISABLED) CONNAUTH(' ')
+	REFRESH SECURITY TYPE(CONNAUTH)
+	end
+	```
 
 1. Run the following commands to send a message to the **app1** queue. Don't forget to replace XX with your student ID.
 
@@ -167,21 +154,21 @@ MQ has been deployed within the Cloud Pak for Integration to other containers de
 	The host name is actually the network service for your queue manager instance.
 
 	```
-	/opt/mqm/samp/bin/amqsputc app1 mq00qs
+	/opt/mqm/samp/bin/amqsputc app1 mqXXqs
 	```
 
-	This command is putting a message on queue **app1** on queue manager **mq00qs**.
+	This command is putting a message on queue **app1** on queue manager **mqXXqs**.
 	Type a message such as:'
 
 	```
-	sending my first test message to qm mq00qs queue app1
+	sending my first test message to qm mqXXqs queue app1
 	```
 
 	Hit enter again to end the program.
 
 	![](./images/image240.png)
 
-1. Return to the MQ Console and navigate back to the queue manager view by clicking on *Manage*.
+1. Return to the MQ Console and navigate back to the queue manager view by clicking on **Manage**, and select again the **Queues** tab.
 
 	![](./images/image241.png)
 
@@ -198,7 +185,7 @@ Congratulations! on completing Lab 1.
 
 ## Cleanup (Optional)
 
-1. Return to the Platform Navigator. Under *Integration Instances* find your instance, click the elipsis on the right and select **Delete**. This will delete the queue manager pods and all related artifacts. This will help reduce load on the cluster as you continue the rest of the labs. This queue manager will not be needed again.
+1. Return to the Platform Navigator. Find your instance, click the elipsis on the right and select **Delete**. This will delete the queue manager pods and all related artifacts. This will help reduce load on the cluster as you continue the rest of the labs. This queue manager will not be needed again.
 
 	![](./images/image244.png)
 
@@ -210,6 +197,6 @@ Congratulations! on completing Lab 1.
 
 	![](./images/image246.png)
 
-[Continue to Lab 2](../Lab_2/mq_cp4i_pot_lab2.md)
+[Continue to Lab 2](../Lab_2new/Readme.md)
 
 [Return to lab index page](../index.md)
