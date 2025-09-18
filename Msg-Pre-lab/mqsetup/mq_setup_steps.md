@@ -150,9 +150,9 @@ Enter the following command to edit file.
 
 	![](./images/setup-mq114c.png)
 
-	1. Update *STORAGE_CLASS* with the primary cluster URL.  
+	1. Update *STORAGE_CLASS* with the corresponding value provided by the instructor.  
 
-	1. Update *OCP Cluster 1* with the primary cluster URL.  
+	1. Update *OCP Cluster 1* with the primary cluster URL provided by the instructor.  
 
 		If you are going to do the MQ NativeHA CRR labs you will have a second cluster so update the *OCP Cluster 2* with that cluster URL.     
 
