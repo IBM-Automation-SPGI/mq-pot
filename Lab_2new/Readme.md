@@ -179,7 +179,7 @@ Here you see **MQ01HACHL** which was defined in the *Queue Manager* stanza of th
 
 	![](./images/image48a.png)
 
-1. Under *Workloads* click *ConfigMaps* then select **nativehamqsc**.
+1. Under *Workloads* click *ConfigMaps* then select **mq01ha-mqsc**.
 
 	![](./images/image49a.png)
 
